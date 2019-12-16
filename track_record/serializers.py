@@ -126,7 +126,7 @@ class DentalHistorySerializer(serializers.ModelSerializer):
         model = DentalHistory
         fields = "__all__"
 
-class NormalAbnormalSerializer(serializers.ModelSerializer):
+class OralAssessmentSerializer(serializers.ModelSerializer):
     skin_desc = serializers.CharField(allow_blank=True)
     eyes_desc = serializers.CharField(allow_blank=True)
     neck_desc = serializers.CharField(allow_blank=True)
@@ -143,7 +143,7 @@ class NormalAbnormalSerializer(serializers.ModelSerializer):
     salivary_glands_desc = serializers.CharField(allow_blank=True)
 
     class Meta:
-        model = NormalAbnormal
+        model = OralAssessment
         fields = "__all__"
 
 class OcclusionSerializer(serializers.ModelSerializer):

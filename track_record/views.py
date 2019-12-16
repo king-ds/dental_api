@@ -56,9 +56,9 @@ class CreateDentalHistory(generics.CreateAPIView):
     model = DentalHistory
     serializer_class = DentalHistorySerializer
 
-class CreateNormalAbnormal(generics.CreateAPIView):
-    model = NormalAbnormal
-    serializer_class = NormalAbnormalSerializer
+class CreateOralAssessment(generics.CreateAPIView):
+    model = OralAssessment
+    serializer_class = OralAssessmentSerializer
 
 class CreateOcclusion(generics.CreateAPIView):
     model = Occlusion

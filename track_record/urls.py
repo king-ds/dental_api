@@ -17,7 +17,7 @@ urlpatterns = [
     path('track-record/social-history', views.CreateSocialHistory.as_view()),
     path('track-record/dental-history', views.CreateDentalHistory.as_view()),
     path('track-record/dental-chart', views.CreateDentalChart.as_view()),
-    path('track-record/normal-abnormal', views.CreateNormalAbnormal.as_view()),
+    path('track-record/normal-abnormal', views.CreateOralAssessment.as_view()),
     path('track-record/occlusion', views.CreateOcclusion.as_view()),
     path('track-record/gingiva', views.CreateGingiva.as_view()),
     path('track-record/vital-sign/<int:track_record>', views.VitalSignFeed.as_view()),

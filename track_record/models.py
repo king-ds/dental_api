@@ -170,7 +170,7 @@ class DentalHistory(models.Model):
     def __str__(self):
         return str(self.id)
 
-class NormalAbnormal(models.Model):
+class OralAssessment(models.Model):
     skin = models.BooleanField(default=False)
     skin_desc = models.CharField(max_length=200)
     eyes = models.BooleanField(default=False)
@@ -253,7 +253,7 @@ class TrackRecord(models.Model):
     female = models.ForeignKey(Female, on_delete=models.CASCADE, blank=True, null=True)
     social_history = models.ForeignKey(SocialHistory, on_delete=models.CASCADE, blank=True, null=True)
     dental_history = models.ForeignKey(DentalHistory, on_delete=models.CASCADE, blank=True, null=True)
-    normal_abnormal = models.ForeignKey(NormalAbnormal, on_delete=models.CASCADE, blank=True, null=True)
+    oral_assessment = models.ForeignKey(OralAssessment, on_delete=models.CASCADE, blank=True, null=True)
     occlusion = models.ForeignKey(Occlusion, on_delete=models.CASCADE, blank=True, null=True)
     gingiva = models.ForeignKey(Gingiva, on_delete=models.CASCADE, blank=True, null=True)
     is_approved_instructor = models.BooleanField(default=False)
