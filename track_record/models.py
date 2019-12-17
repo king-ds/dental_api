@@ -145,12 +145,15 @@ class DentalHistory(models.Model):
     brush = models.IntegerField(null=True, blank=True)
     floss = models.IntegerField(null=True, blank=True)
     rinse = models.IntegerField(null=True, blank=True)
+
     smile = models.BooleanField(default=False)
     relevant_smile = models.CharField(max_length=50)
     gums = models.BooleanField(default=False)
     relevant_gums = models.CharField(max_length=50)
     extraction = models.BooleanField(default=False)
     relevant_extraction = models.CharField(max_length=50)
+    bled = models.BooleanField(default=False)
+    relevant_bled = models.CharField(max_length=50)
     orthodomic = models.BooleanField(default=False)
     relevant_orthodomic = models.CharField(max_length=50)
     cold = models.BooleanField(default=False)
@@ -205,13 +208,20 @@ class OralAssessment(models.Model):
         return str(self.id)
 
 class Occlusion(models.Model):
-    occlusion = models.CharField(max_length=20)
+    occlusion_class = models.CharField(max_length=20)
     other_occlusal = models.CharField(max_length=200)
     oral_habits = models.CharField(max_length=200)
     plaque = models.CharField(max_length=20)
-    enamel = models.CharField(max_length=20)
     generalized = models.BooleanField(default=False)
     localized = models.BooleanField(default=False)
+    generalized_desc = models.CharField(max_length=50)
+    localized_desc = models.CharField(max_length=50)
+    erosion = models.BooleanField(default=False)
+    demineralization = models.BooleanField(default=False)
+    attrition = models.BooleanField(default=False)
+    abfraction = models.BooleanField(default=False)
+    fluorosis = models.BooleanField(default=False)
+    abrasion = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.id)
@@ -219,14 +229,9 @@ class Occlusion(models.Model):
 class Gingiva(models.Model):
     attached_gingiva = models.CharField(max_length=10)
     frenular_attachment = models.CharField(max_length=10)
-    none = models.BooleanField(default=False)
-    stage_1 = models.BooleanField(default=False)
-    stage_2 = models.BooleanField(default=False)
-    stage_3 = models.BooleanField(default=False)
-    horizontal = models.BooleanField(default=False)
-    vertical = models.BooleanField(default=False)
-    generalized = models.BooleanField(default=False)
-    localized = models.BooleanField(default=False)
+    radiographic_stage = models.CharField(max_length=20)
+    radiographic_hv = models.CharField(max_length=20)
+    radiographic_gl = models.CharField(max_length=20)
     color = models.CharField(max_length=200)
     consistency = models.CharField(max_length=200)
     contour = models.CharField(max_length=200)
@@ -274,6 +279,18 @@ class VitalSign(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+class TreatmentRecord(models.Model):
+    date = models.DateField(null=True, blank=True)
+    procedure = models.CharField(max_length=100)
+    clinician = models.ForeignKey(Clinician, on_delete=models.CASCADE, blank=True, null=True)
+    clinical_instructor = models.ForeignKey(ClinicalInstructor, on_delete=models.CASCADE, blank=True, null=True)
+    patient_signature = models.BooleanField(default=False)
+    track_record = models.ForeignKey(TrackRecord, on_delete=models.CASCADE, blank=True, null=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.track_record)
 
 class DentalChart(models.Model):
     teeth_number = models.IntegerField(null=True)

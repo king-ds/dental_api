@@ -24,4 +24,5 @@ urlpatterns = [
     path('', include('patient_feed.urls')),
     path('', include('track_record.urls')),
     path('', include('updates.urls')),
+    path('', include('clinician_feed.urls')),
 ]

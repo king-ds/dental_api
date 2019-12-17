@@ -76,9 +76,20 @@ class CreatAllergies(generics.CreateAPIView):
     model = Allergy
     serializer_class = AllergiesSerializer
 
+class CreateTreatmentRecord(generics.CreateAPIView):
+    model = TreatmentRecord
+    serializer_class = TreatmentRecordSerializer
+
 class MixTrackRecord(viewsets.ModelViewSet):
     queryset = TrackRecord.objects.all()
     serializer_class = MixTrackRecordSerializer
+
+class TreatmentRecordFeed(generics.ListAPIView):
+    serializer_class = MixTreatmentRecordSerializer
+
+    def get_queryset(self):
+        track_record_id = self.kwargs['track_record']
+        return TreatmentRecord.objects.filter(track_record=track_record_id)
 
 class VitalSignFeed(generics.ListAPIView):
     serializer_class = VitalSignSerializer

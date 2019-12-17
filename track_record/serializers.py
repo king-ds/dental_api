@@ -55,6 +55,13 @@ class VitalSignSerializer(serializers.ModelSerializer):
         model = VitalSign
         fields = "__all__"
 
+class TreatmentRecordSerializer(serializers.ModelSerializer):
+    procedure = serializers.CharField(allow_blank=True, required=False)
+
+    class Meta:
+        model = TreatmentRecord
+        fields = "__all__"
+
 class AllergiesSerializer(serializers.ModelSerializer):
     others = serializers.CharField(allow_blank=True)
     
@@ -73,53 +80,54 @@ class FemaleSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class SocialHistorySerializer(serializers.ModelSerializer):
-    kind_tobacco = serializers.CharField(allow_blank=True)
-    often_tobacco = serializers.CharField(allow_blank=True)
-    years_tobacco = serializers.CharField(allow_blank=True)
-    stop_tobacco = serializers.CharField(allow_blank=True)
-    kind_cigarettes = serializers.CharField(allow_blank=True)
-    often_cigarettes = serializers.CharField(allow_blank=True)
-    years_cigarettes = serializers.CharField(allow_blank=True)
-    stop_cigarettes = serializers.CharField(allow_blank=True)
-    kind_vape = serializers.CharField(allow_blank=True)
-    often_vape = serializers.CharField(allow_blank=True)
-    years_vape = serializers.CharField(allow_blank=True)
-    stop_vape = serializers.CharField(allow_blank=True)
-    kind_recreation = serializers.CharField(allow_blank=True)
-    often_recreation = serializers.CharField(allow_blank=True)
-    years_recreation = serializers.CharField(allow_blank=True)
-    stop_recreation = serializers.CharField(allow_blank=True)
-    kind_therapeutic = serializers.CharField(allow_blank=True)
-    often_therapeutic = serializers.CharField(allow_blank=True)
-    years_therapeutic = serializers.CharField(allow_blank=True)
-    stop_therapeutic = serializers.CharField(allow_blank=True)
-    kind_alcoholic = serializers.CharField(allow_blank=True)
-    often_alcoholic = serializers.CharField(allow_blank=True)
-    years_alcoholic = serializers.CharField(allow_blank=True)
-    stop_alcoholic = serializers.CharField(allow_blank=True)
+    kind_tobacco = serializers.CharField(allow_blank=True, required=False)
+    often_tobacco = serializers.CharField(allow_blank=True, required=False)
+    years_tobacco = serializers.CharField(allow_blank=True, required=False)
+    stop_tobacco = serializers.CharField(allow_blank=True, required=False)
+    kind_cigarettes = serializers.CharField(allow_blank=True, required=False)
+    often_cigarettes = serializers.CharField(allow_blank=True, required=False)
+    years_cigarettes = serializers.CharField(allow_blank=True, required=False)
+    stop_cigarettes = serializers.CharField(allow_blank=True, required=False)
+    kind_vape = serializers.CharField(allow_blank=True, required=False)
+    often_vape = serializers.CharField(allow_blank=True, required=False)
+    years_vape = serializers.CharField(allow_blank=True, required=False)
+    stop_vape = serializers.CharField(allow_blank=True, required=False)
+    kind_recreation = serializers.CharField(allow_blank=True, required=False)
+    often_recreation = serializers.CharField(allow_blank=True, required=False)
+    years_recreation = serializers.CharField(allow_blank=True, required=False)
+    stop_recreation = serializers.CharField(allow_blank=True, required=False)
+    kind_therapeutic = serializers.CharField(allow_blank=True, required=False)
+    often_therapeutic = serializers.CharField(allow_blank=True, required=False)
+    years_therapeutic = serializers.CharField(allow_blank=True, required=False)
+    stop_therapeutic = serializers.CharField(allow_blank=True, required=False)
+    kind_alcoholic = serializers.CharField(allow_blank=True, required=False)
+    often_alcoholic = serializers.CharField(allow_blank=True, required=False)
+    years_alcoholic = serializers.CharField(allow_blank=True, required=False)
+    stop_alcoholic = serializers.CharField(allow_blank=True, required=False)
     
     class Meta:
         model = SocialHistory
         fields = "__all__"
 
 class DentalHistorySerializer(serializers.ModelSerializer):
-    freq_dental_visit = serializers.CharField(allow_blank=True)
-    proc_last_visit = serializers.CharField(allow_blank=True)
-    exposure_anesthesia = serializers.CharField(allow_blank=True)
-    complications_dental = serializers.CharField(allow_blank=True)
-    brush = serializers.IntegerField(required=False)
-    floss = serializers.IntegerField(required=False)
-    rinse = serializers.IntegerField(required=False)
-    relevant_smile = serializers.CharField(allow_blank=True)
-    relevant_extraction = serializers.CharField(allow_blank=True)
-    relevant_orthodomic = serializers.CharField(allow_blank=True)
-    relevant_gums = serializers.CharField(allow_blank=True)
-    relevant_cold = serializers.CharField(allow_blank=True)
-    relevant_denture = serializers.CharField(allow_blank=True)
-    relevant_periodental = serializers.CharField(allow_blank=True)
-    relevant_bleed = serializers.CharField(allow_blank=True)
-    relevant_jaw_pain = serializers.CharField(allow_blank=True)
-    relevant_catch = serializers.CharField(allow_blank=True)
+    freq_dental_visit = serializers.CharField(allow_blank=True, required=False)
+    proc_last_visit = serializers.CharField(allow_blank=True, required=False)
+    exposure_anesthesia = serializers.CharField(allow_blank=True, required=False)
+    complications_dental = serializers.CharField(allow_blank=True, required=False)
+    brush = serializers.IntegerField(required=False, allow_null=True)
+    floss = serializers.IntegerField(required=False, allow_null=True)
+    rinse = serializers.IntegerField(required=False, allow_null=True)
+    relevant_smile = serializers.CharField(allow_blank=True, required=False)
+    relevant_extraction = serializers.CharField(allow_blank=True, required=False)
+    relevant_orthodomic = serializers.CharField(allow_blank=True, required=False)
+    relevant_bled = serializers.CharField(allow_blank=True, required=False)
+    relevant_gums = serializers.CharField(allow_blank=True, required=False)
+    relevant_cold = serializers.CharField(allow_blank=True, required=False)
+    relevant_denture = serializers.CharField(allow_blank=True, required=False)
+    relevant_periodental = serializers.CharField(allow_blank=True, required=False)
+    relevant_bleed = serializers.CharField(allow_blank=True, required=False)
+    relevant_jaw_pain = serializers.CharField(allow_blank=True, required=False)
+    relevant_catch = serializers.CharField(allow_blank=True, required=False)
     date_last_visit = serializers.DateField(required=False)
 
     class Meta:
@@ -127,43 +135,47 @@ class DentalHistorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class OralAssessmentSerializer(serializers.ModelSerializer):
-    skin_desc = serializers.CharField(allow_blank=True)
-    eyes_desc = serializers.CharField(allow_blank=True)
-    neck_desc = serializers.CharField(allow_blank=True)
-    TMD_desc = serializers.CharField(allow_blank=True)
-    lymph_nodes_desc = serializers.CharField(allow_blank=True)
-    lips_desc = serializers.CharField(allow_blank=True)
-    buccal_mucosa_desc = serializers.CharField(allow_blank=True)
-    vestibule_desc = serializers.CharField(allow_blank=True)
-    alveolar_ridge_desc = serializers.CharField(allow_blank=True)
-    hard_palate_desc = serializers.CharField(allow_blank=True)
-    oro_pharynx_desc = serializers.CharField(allow_blank=True)
-    tongue_desc = serializers.CharField(allow_blank=True)
-    mouth_floor_desc = serializers.CharField(allow_blank=True)
-    salivary_glands_desc = serializers.CharField(allow_blank=True)
+    skin_desc = serializers.CharField(allow_blank=True, required=False)
+    eyes_desc = serializers.CharField(allow_blank=True, required=False)
+    neck_desc = serializers.CharField(allow_blank=True, required=False)
+    TMD_desc = serializers.CharField(allow_blank=True, required=False)
+    lymph_nodes_desc = serializers.CharField(allow_blank=True, required=False)
+    lips_desc = serializers.CharField(allow_blank=True, required=False)
+    buccal_mucosa_desc = serializers.CharField(allow_blank=True, required=False)
+    vestibule_desc = serializers.CharField(allow_blank=True, required=False)
+    alveolar_ridge_desc = serializers.CharField(allow_blank=True, required=False)
+    hard_palate_desc = serializers.CharField(allow_blank=True, required=False)
+    oro_pharynx_desc = serializers.CharField(allow_blank=True, required=False)
+    tongue_desc = serializers.CharField(allow_blank=True, required=False)
+    mouth_floor_desc = serializers.CharField(allow_blank=True, required=False)
+    salivary_glands_desc = serializers.CharField(allow_blank=True, required=False)
 
     class Meta:
         model = OralAssessment
         fields = "__all__"
 
 class OcclusionSerializer(serializers.ModelSerializer):
-    occlusion = serializers.CharField(allow_blank=True)
-    other_occlusal = serializers.CharField(allow_blank=True)
-    oral_habits = serializers.CharField(allow_blank=True)
-    plaque = serializers.CharField(allow_blank=True)
-    enamel = serializers.CharField(allow_blank=True)
+    occlusion_class = serializers.CharField(allow_blank=True, required=False)
+    other_occlusal = serializers.CharField(allow_blank=True, required=False)
+    oral_habits = serializers.CharField(allow_blank=True, required=False)
+    plaque = serializers.CharField(allow_blank=True, required=False)
+    generalized_desc = serializers.CharField(allow_blank=True, required=False)
+    localized_desc = serializers.CharField(allow_blank=True, required=False)
 
     class Meta:
         model = Occlusion
         fields = "__all__"
 
 class GingivaSerializer(serializers.ModelSerializer):
-    attached_gingiva = serializers.CharField(allow_blank=True)
-    frenular_attachment = serializers.CharField(allow_blank=True)
-    color = serializers.CharField(allow_blank=True)
-    consistency = serializers.CharField(allow_blank=True)
-    contour = serializers.CharField(allow_blank=True)
-    texture = serializers.CharField(allow_blank=True)
+    attached_gingiva = serializers.CharField(allow_blank=True, required=False)
+    frenular_attachment = serializers.CharField(allow_blank=True, required=False)
+    radiographic_stage = serializers.CharField(allow_blank=True, required=False)
+    radiographic_hv = serializers.CharField(allow_blank=True, required=False)
+    radiographic_gl = serializers.CharField(allow_blank=True, required=False)
+    color = serializers.CharField(allow_blank=True, required=False)
+    consistency = serializers.CharField(allow_blank=True, required=False)
+    contour = serializers.CharField(allow_blank=True, required=False)
+    texture = serializers.CharField(allow_blank=True, required=False)
 
     class Meta:
         model = Gingiva
@@ -185,11 +197,17 @@ class MixTrackRecordSerializer(serializers.HyperlinkedModelSerializer):
     medical_health_questionnaire = MedicalHealthQuestionnaireSerializer(required=False)
     female = FemaleSerializer(required=False)
     allergy = AllergiesSerializer(required=False)
+    oral_assessment = OralAssessmentSerializer(required=False)
+    occlusion = OcclusionSerializer(required=False)
+    social_history = SocialHistorySerializer(required=False)
+    dental_history = DentalHistorySerializer(required=False)
+    gingiva = GingivaSerializer(required=False)
 
     class Meta:
         model = TrackRecord
         fields = ("additional_personal_data", "medical_history", "medical_health_questionnaire",  
-                "allergy", "patient", "clinician", "female", "id", "is_approved_instructor", "url")
+                "allergy", "patient", "clinician", "female", "social_history", "oral_assessment", 
+                "occlusion", "dental_history", "id", "is_approved_instructor", "gingiva", "url")
 
     def update(self, instance, validated_data):
 
@@ -307,5 +325,179 @@ class MixTrackRecordSerializer(serializers.HyperlinkedModelSerializer):
             female.save()
         except:
             pass
+        
+        # Oral Assessment
+        try:
+            oral_assessment_data = validated_data.pop('oral_assessment')
+            oral_assessment = instance.oral_assessment
+            oral_assessment.skin = oral_assessment_data.get('skin', oral_assessment.skin)
+            oral_assessment.skin_desc = oral_assessment_data.get('skin_desc', oral_assessment.skin_desc)
+            oral_assessment.eyes = oral_assessment_data.get('eyes', oral_assessment.eyes)
+            oral_assessment.eyes_desc = oral_assessment_data.get('eyes_desc', oral_assessment.eyes_desc)
+            oral_assessment.neck = oral_assessment_data.get('neck', oral_assessment.neck)
+            oral_assessment.neck_desc = oral_assessment_data.get('neck_desc', oral_assessment.neck_desc)
+            oral_assessment.TMD = oral_assessment_data.get('TMD', oral_assessment.TMD)
+            oral_assessment.TMD_desc = oral_assessment_data.get('TMD_desc', oral_assessment.TMD_desc)
+            oral_assessment.lymph_nodes = oral_assessment_data.get('lymph_nodes', oral_assessment.lymph_nodes)
+            oral_assessment.lymph_nodes_desc = oral_assessment_data.get('lymph_nodes_desc', oral_assessment.lymph_nodes_desc)
+            oral_assessment.lips = oral_assessment_data.get('lips', oral_assessment.lips)
+            oral_assessment.lips_desc = oral_assessment_data.get('lips_desc', oral_assessment.lips_desc)
+            oral_assessment.buccal_mucosa = oral_assessment_data.get('buccal_mucosa', oral_assessment.buccal_mucosa)
+            oral_assessment.buccal_mucosa_desc = oral_assessment_data.get('buccal_mucosa_desc', oral_assessment.buccal_mucosa_desc)
+            oral_assessment.vestibule = oral_assessment_data.get('vestibule', oral_assessment.vestibule)
+            oral_assessment.vestibule_desc = oral_assessment_data.get('vestibule_desc', oral_assessment.vestibule_desc)
+            oral_assessment.alveolar_ridge = oral_assessment_data.get('alveolar_ridge', oral_assessment.alveolar_ridge)
+            oral_assessment.alveolar_ridge_desc = oral_assessment_data.get('alveolar_ridge_desc', oral_assessment.alveolar_ridge_desc)
+            oral_assessment.hard_palate = oral_assessment_data.get('hard_palate', oral_assessment.hard_palate)
+            oral_assessment.hard_palate_desc = oral_assessment_data.get('hard_palate_desc', oral_assessment.hard_palate_desc)
+            oral_assessment.oro_pharynx = oral_assessment_data.get('oro_pharynx', oral_assessment.oro_pharynx)
+            oral_assessment.oro_pharynx_desc = oral_assessment_data.get('oro_pharynx_desc', oral_assessment.oro_pharynx_desc)
+            oral_assessment.tongue = oral_assessment_data.get('tongue', oral_assessment.tongue)
+            oral_assessment.tongue_desc = oral_assessment_data.get('tongue_desc', oral_assessment.tongue_desc)
+            oral_assessment.mouth_floor = oral_assessment_data.get('mouth_floor', oral_assessment.mouth_floor)
+            oral_assessment.mouth_floor_desc = oral_assessment_data.get('mouth_floor_desc', oral_assessment.mouth_floor_desc)
+            oral_assessment.salivary_glands = oral_assessment_data.get('salivary_glands', oral_assessment.salivary_glands)
+            oral_assessment.salivary_glands_desc = oral_assessment_data.get('salivary_glands_desc', oral_assessment.salivary_glands_desc)
+            oral_assessment.datetime_added = oral_assessment_data.get('datetime_added', oral_assessment.datetime_added)
+
+            oral_assessment.save()
+        except:
+            pass
+        
+        # Occlusion
+        try:
+            occlusion_data = validated_data.pop('occlusion')
+            occlusion = instance.occlusion
+            occlusion.occlusion_class = occlusion_data.get('occlusion_class', occlusion.occlusion_class)
+            occlusion.other_occlusal = occlusion_data.get('other_occlusal', occlusion.other_occlusal)
+            occlusion.oral_habits = occlusion_data.get('oral_habits', occlusion.oral_habits)
+            occlusion.plaque = occlusion_data.get('plaque', occlusion.plaque)
+            occlusion.generalized = occlusion_data.get('generalized', occlusion.generalized)
+            occlusion.localized = occlusion_data.get('localized', occlusion.localized)
+            occlusion.generalized_desc = occlusion_data.get('generalized_desc', occlusion.generalized_desc)
+            occlusion.localized_desc = occlusion_data.get('localized_desc', occlusion.localized_desc)
+            occlusion.erosion = occlusion_data.get('erosion', occlusion.erosion)
+            occlusion.demineralization = occlusion_data.get('demineralization', occlusion.demineralization)
+            occlusion.attrition = occlusion_data.get('attrition', occlusion.attrition)
+            occlusion.abfraction = occlusion_data.get('abfraction', occlusion.abfraction)
+            occlusion.fluorosis = occlusion_data.get('fluorosis', occlusion.fluorosis)
+            occlusion.abrasion = occlusion_data.get('abrasion', occlusion.abrasion)
+
+            occlusion.save()
+        except:
+            pass
+
+        # Social History
+
+        try:
+            social_history_data = validated_data.pop('social_history')
+            social_history = instance.social_history
+            social_history.using_tobacco = social_history_data.get('using_tobacco', social_history.using_tobacco)
+            social_history.using_cigarettes = social_history_data.get('using_cigarettes', social_history.using_cigarettes)
+            social_history.using_vape = social_history_data.get('using_vape', social_history.using_vape)
+            social_history.using_recreation = social_history_data.get('using_recreation', social_history.using_recreation)
+            social_history.using_therapeutic = social_history_data.get('using_therapeutic', social_history.using_therapeutic)
+            social_history.drink_alcoholic = social_history_data.get('drink_alcoholic', social_history.drink_alcoholic)
+            social_history.kind_tobacco = social_history_data.get('kind_tobacco', social_history.kind_tobacco)
+            social_history.often_tobacco = social_history_data.get('often_tobacco', social_history.often_tobacco)
+            social_history.years_tobacco = social_history_data.get('years_tobacco', social_history.years_tobacco)
+            social_history.stop_tobacco = social_history_data.get('stop_tobacco', social_history.stop_tobacco)
+            social_history.kind_cigarettes = social_history_data.get('kind_cigarettes', social_history.kind_cigarettes)
+            social_history.often_cigarettes = social_history_data.get('often_cigarettes', social_history.often_cigarettes)
+            social_history.years_cigarettes = social_history_data.get('years_cigarettes', social_history.years_cigarettes)
+            social_history.stop_cigarettes = social_history_data.get('stop_cigarettes', social_history.stop_cigarettes)
+            social_history.kind_vape = social_history_data.get('kind_vape', social_history.kind_vape)
+            social_history.often_vape = social_history_data.get('often_vape', social_history.often_vape)
+            social_history.years_vape = social_history_data.get('years_vape', social_history.years_vape)
+            social_history.stop_vape = social_history_data.get('stop_vape', social_history.stop_vape)
+            social_history.kind_recreation = social_history_data.get('kind_recreation', social_history.kind_recreation)
+            social_history.often_recreation = social_history_data.get('often_recreation', social_history.often_recreation)
+            social_history.years_recreation = social_history_data.get('years_recreation', social_history.years_recreation)
+            social_history.stop_recreation = social_history_data.get('stop_recreation', social_history.stop_recreation)
+            social_history.kind_therapeutic = social_history_data.get('kind_therapeutic', social_history.kind_therapeutic)
+            social_history.often_therapeutic = social_history_data.get('often_therapeutic', social_history.often_therapeutic)
+            social_history.years_therapeutic = social_history_data.get('years_therapeutic', social_history.years_therapeutic)
+            social_history.stop_therapeutic = social_history_data.get('stop_therapeutic', social_history.stop_therapeutic)
+            social_history.kind_alcoholic = social_history_data.get('kind_alcoholic', social_history.kind_alcoholic)
+            social_history.often_alcoholic = social_history_data.get('often_alcoholic', social_history.often_alcoholic)
+            social_history.years_alcoholic = social_history_data.get('years_alcoholic', social_history.years_alcoholic)
+            social_history.stop_alcoholic = social_history_data.get('stop_alcoholic', social_history.stop_alcoholic)
+
+            social_history.save()
+
+        except:
+            pass
+
+        # Dental History
+        try:
+            dental_history_data = validated_data.pop('dental_history')
+            dental_history = instance.dental_history
+            dental_history.date_last_visit = dental_history_data.get('date_last_visit', dental_history.date_last_visit)
+            dental_history.freq_dental_visit = dental_history_data.get('freq_dental_visit', dental_history.freq_dental_visit)
+            dental_history.proc_last_visit = dental_history_data.get('proc_last_visit', dental_history.proc_last_visit)
+            dental_history.exposure_anesthesia = dental_history_data.get('exposure_anesthesia', dental_history.exposure_anesthesia)
+            dental_history.complications_dental = dental_history_data.get('complications_dental', dental_history.complications_dental)
+            dental_history.brush = dental_history_data.get('brush', dental_history.brush)
+            dental_history.floss = dental_history_data.get('floss', dental_history.floss)
+            dental_history.rinse = dental_history_data.get('rinse', dental_history.rinse)
+            dental_history.smile = dental_history_data.get('smile', dental_history.smile)
+            dental_history.relevant_smile = dental_history_data.get('relevant_smile', dental_history.relevant_smile)
+            dental_history.gums = dental_history_data.get('gums', dental_history.gums)
+            dental_history.relevant_gums = dental_history_data.get('relevant_gums', dental_history.relevant_gums)
+            dental_history.extraction = dental_history_data.get('extraction', dental_history.extraction)
+            dental_history.relevant_extraction = dental_history_data.get('relevant_extraction', dental_history.relevant_extraction)
+            dental_history.bled = dental_history_data.get('bled', dental_history.bled)
+            dental_history.relevant_bled = dental_history_data.get('relevant_bled', dental_history.relevant_bled)
+            dental_history.orthodomic = dental_history_data.get('orthodomic', dental_history.orthodomic)
+            dental_history.relevant_orthodomic = dental_history_data.get('relevant_orthodomic', dental_history.relevant_orthodomic)
+            dental_history.cold = dental_history_data.get('cold', dental_history.cold)
+            dental_history.relevant_cold = dental_history_data.get('relevant_cold', dental_history.relevant_cold)
+            dental_history.periodental = dental_history_data.get('periodental', dental_history.periodental)
+            dental_history.relevant_periodental = dental_history_data.get('relevant_periodental', dental_history.relevant_periodental)
+            dental_history.bleed = dental_history_data.get('bleed', dental_history.bleed)
+            dental_history.relevant_bleed = dental_history_data.get('relevant_bleed', dental_history.relevant_bleed)
+            dental_history.denture = dental_history_data.get('denture', dental_history.denture)
+            dental_history.relevant_denture = dental_history_data.get('relevant_denture', dental_history.relevant_denture)
+            dental_history.jaw_pain = dental_history_data.get('jaw_pain', dental_history.jaw_pain)
+            dental_history.relevant_jaw_pain = dental_history_data.get('relevant_jaw_pain', dental_history.relevant_jaw_pain)
+            dental_history.catch = dental_history_data.get('catch', dental_history.catch)
+            dental_history.relevant_catch = dental_history_data.get('relevant_catch', dental_history.relevant_catch)
+            dental_history.datetime_added = dental_history_data.get('datetime_added', dental_history.datetime_added)
+
+            dental_history.save()
+
+        except:
+            pass
+
+        # Gingiva
+        try:
+            gingiva_data = validated_data.pop('gingiva')
+            gingiva = instance.gingiva
+            gingiva.attached_gingiva = gingiva_data.get('attached_gingiva', gingiva.attached_gingiva)
+            gingiva.frenular_attachment = gingiva_data.get('frenular_attachment', gingiva.frenular_attachment)
+            gingiva.radiographic_stage = gingiva_data.get('radiographic_stage', gingiva.radiographic_stage)
+            gingiva.radiographic_hv = gingiva_data.get('radiographic_hv', gingiva.radiographic_hv)
+            gingiva.radiographic_gl = gingiva_data.get('radiographic_gl', gingiva.radiographic_gl)
+            gingiva.color = gingiva_data.get('color', gingiva.color)
+            gingiva.consistency = gingiva_data.get('consistency', gingiva.consistency)
+            gingiva.contour = gingiva_data.get('contour', gingiva.contour)
+            gingiva.texture = gingiva_data.get('texture', gingiva.texture)
+
+            gingiva.save()
+
+        except:
+            pass
 
         return instance
+
+
+class MixTreatmentRecordSerializer(serializers.HyperlinkedModelSerializer):
+    patient = PatientSerializer(required=False)
+    clinician = ClinicianSerializer(required=False)
+    clinical_instructor = ClinicalInstructorSerializer(required=False)
+    track_record = TrackRecordSerializer(required=False)
+
+    class Meta:
+        model = TreatmentRecord
+        fields = ("patient", "clinician", "clinical_instructor",  
+                "track_record", "procedure", "date", "patient_signature")
