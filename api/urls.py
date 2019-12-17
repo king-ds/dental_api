@@ -25,4 +25,5 @@ urlpatterns = [
     path('', include('track_record.urls')),
     path('', include('updates.urls')),
     path('', include('clinician_feed.urls')),
+    path('', include('instructor_feed.urls')),
 ]
