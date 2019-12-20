@@ -110,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Singapore'
 
 USE_I18N = True
 
@@ -136,3 +136,8 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
+
+# REST FRAMEWORK
+REST_FRAMEWORK = {
+    'DATETIME_FORMAT': "%m/%d/%Y %H:%M"
+}

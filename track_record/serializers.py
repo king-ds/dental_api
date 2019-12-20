@@ -62,6 +62,13 @@ class TreatmentRecordSerializer(serializers.ModelSerializer):
         model = TreatmentRecord
         fields = "__all__"
 
+class CDARSerializer(serializers.ModelSerializer):
+    procedure = serializers.CharField(allow_blank=True, required=False)
+
+    class Meta:
+        model = CDAR
+        fields = "__all__"
+
 class AllergiesSerializer(serializers.ModelSerializer):
     others = serializers.CharField(allow_blank=True)
     
@@ -207,7 +214,7 @@ class MixTrackRecordSerializer(serializers.HyperlinkedModelSerializer):
         model = TrackRecord
         fields = ("additional_personal_data", "medical_history", "medical_health_questionnaire",  
                 "allergy", "patient", "clinician", "female", "social_history", "oral_assessment", 
-                "occlusion", "dental_history", "id", "is_approved_instructor", "gingiva", "url")
+                "occlusion", "dental_history", "id", "is_approved_instructor", "is_approved_patient", "gingiva", "url")
 
     def update(self, instance, validated_data):
 
@@ -490,7 +497,6 @@ class MixTrackRecordSerializer(serializers.HyperlinkedModelSerializer):
 
         return instance
 
-
 class MixTreatmentRecordSerializer(serializers.HyperlinkedModelSerializer):
     patient = PatientSerializer(required=False)
     clinician = ClinicianSerializer(required=False)
@@ -500,4 +506,15 @@ class MixTreatmentRecordSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TreatmentRecord
         fields = ("patient", "clinician", "clinical_instructor",  
-                "track_record", "procedure", "date", "patient_signature")
+                "track_record", "procedure", "date", "patient_signature", "instructor_signature", "id")
+
+class MixCDARSerializer(serializers.HyperlinkedModelSerializer):
+    patient = PatientSerializer(required=False)
+    clinician = ClinicianSerializer(required=False)
+    clinical_instructor = ClinicalInstructorSerializer(required=False)
+    track_record = TrackRecordSerializer(required=False)
+
+    class Meta:
+        model = CDAR
+        fields = ("patient", "clinician", "clinical_instructor",  
+                "track_record", "procedure", "date", "patient_signature", "instructor_signature", "id")

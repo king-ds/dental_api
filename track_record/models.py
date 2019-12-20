@@ -286,6 +286,20 @@ class TreatmentRecord(models.Model):
     clinician = models.ForeignKey(Clinician, on_delete=models.CASCADE, blank=True, null=True)
     clinical_instructor = models.ForeignKey(ClinicalInstructor, on_delete=models.CASCADE, blank=True, null=True)
     patient_signature = models.BooleanField(default=False)
+    instructor_signature = models.BooleanField(default=False)
+    track_record = models.ForeignKey(TrackRecord, on_delete=models.CASCADE, blank=True, null=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.track_record)
+
+class CDAR(models.Model):
+    date = models.DateField(null=True, blank=True)
+    procedure = models.CharField(max_length=100)
+    clinician = models.ForeignKey(Clinician, on_delete=models.CASCADE, blank=True, null=True)
+    clinical_instructor = models.ForeignKey(ClinicalInstructor, on_delete=models.CASCADE, blank=True, null=True)
+    patient_signature = models.BooleanField(default=False)
+    instructor_signature = models.BooleanField(default=False)
     track_record = models.ForeignKey(TrackRecord, on_delete=models.CASCADE, blank=True, null=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, blank=True, null=True)
 

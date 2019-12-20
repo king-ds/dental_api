@@ -21,6 +21,7 @@ urlpatterns = [
     path('track-record/occlusion', views.CreateOcclusion.as_view()),
     path('track-record/gingiva', views.CreateGingiva.as_view()),
     path('track-record/treatment-record', views.CreateTreatmentRecord.as_view()),
+    path('track-record/cdar', views.CreateCDAR.as_view()),
     path('track-record/vital-sign/<int:track_record>', views.VitalSignFeed.as_view()),
     path('track-record/treatment-record/<int:track_record>', views.TreatmentRecordFeed.as_view()),
     path('track-record/dental-chart/<int:track_record>', views.DentalChartFeed.as_view()),
@@ -30,4 +31,6 @@ urlpatterns = [
     path('track-record/dental-chart-q4/<int:track_record>', views.Q4DentalChartFeed.as_view()),
     path('track-record/vital-sign-detail/<int:id>', views.VitalSignDetailView.as_view()),
     path('track-record/dental-chart-detail/<int:id>', views.DentalChartDetailView.as_view()),
+    path('track-record/treatment-record-detail/<int:id>', views.TreatmentRecordDetailView.as_view()),
+    path('track-record/cdar-detail/<int:id>', views.TreatmentRecordDetailView.as_view()),
 ]

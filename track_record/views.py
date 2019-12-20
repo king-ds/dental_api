@@ -80,6 +80,10 @@ class CreateTreatmentRecord(generics.CreateAPIView):
     model = TreatmentRecord
     serializer_class = TreatmentRecordSerializer
 
+class CreateCDAR(generics.CreateAPIView):
+    model = CDAR
+    serializer_class = CDARSerializer
+
 class MixTrackRecord(viewsets.ModelViewSet):
     queryset = TrackRecord.objects.all()
     serializer_class = MixTrackRecordSerializer
@@ -156,6 +160,28 @@ class DentalChartDetailView(APIView):
         serializer = DentalChartSerializer(dental_chart, data=request.data, partial=True)
         if serializer.is_valid():
             dental_chart = serializer.save()
+            return Response(serializer.data, status=HTTP_200_OK)
+        
+        return Response(serializer.errors, status=HTTP_404_NOT_FOUND)
+
+class TreatmentRecordDetailView(APIView):
+
+    def patch(self, request, *args, **kwargs):
+        treatment_record = get_object_or_404(TreatmentRecord, pk=kwargs['id'])
+        serializer = TreatmentRecordSerializer(treatment_record, data=request.data, partial=True)
+        if serializer.is_valid():
+            treatment_record = serializer.save()
+            return Response(serializer.data, status=HTTP_200_OK)
+        
+        return Response(serializer.errors, status=HTTP_404_NOT_FOUND)
+
+class CDARDetailView(APIView):
+
+    def patch(self, request, *args, **kwargs):
+        cdar = get_object_or_404(CDAR, pk=kwargs['id'])
+        serializer = CDARSerializer(cdar, data=request.data, partial=True)
+        if serializer.is_valid():
+            cdar = serializer.save()
             return Response(serializer.data, status=HTTP_200_OK)
         
         return Response(serializer.errors, status=HTTP_404_NOT_FOUND)
