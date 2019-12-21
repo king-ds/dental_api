@@ -20,6 +20,7 @@ class ClinicalInstructor(models.Model):
     middle_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
+    datetime_joined = models.DateTimeField(auto_now_add=True)
     # CDAR = models.ForeignKey()
 
     def __str__(self):
