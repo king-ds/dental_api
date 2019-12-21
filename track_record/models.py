@@ -251,6 +251,7 @@ class PeriodontalDiagnosis(models.Model):
 class TrackRecord(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, blank=True, null=True)
     clinician = models.ForeignKey(Clinician, on_delete=models.CASCADE, blank=True, null=True)
+    clinical_instructor = models.ForeignKey(ClinicalInstructor, on_delete=models.CASCADE, blank=True, null=True)
     additional_personal_data = models.ForeignKey(AdditionalPersonalData, on_delete=models.CASCADE, blank=True, null=True)
     medical_history = models.ForeignKey(MedicalHistory, on_delete=models.CASCADE, blank=True, null=True)
     medical_health_questionnaire = models.ForeignKey(MedicalHealthQuestionnaire, on_delete=models.CASCADE, blank=True, null=True)
@@ -261,6 +262,7 @@ class TrackRecord(models.Model):
     oral_assessment = models.ForeignKey(OralAssessment, on_delete=models.CASCADE, blank=True, null=True)
     occlusion = models.ForeignKey(Occlusion, on_delete=models.CASCADE, blank=True, null=True)
     gingiva = models.ForeignKey(Gingiva, on_delete=models.CASCADE, blank=True, null=True)
+    pending_for_approval = models.BooleanField(default=False)
     is_approved_instructor = models.BooleanField(default=False)
     is_approved_patient = models.BooleanField(default=False)
     datetime_added = models.DateTimeField(auto_now_add=True)

@@ -199,6 +199,7 @@ class TrackRecordSerializer(serializers.ModelSerializer):
 class MixTrackRecordSerializer(serializers.HyperlinkedModelSerializer):
     patient = PatientSerializer(required=False)
     clinician = ClinicianSerializer(required=False)
+    clinical_instructor = ClinicalInstructorSerializer(required=False)
     additional_personal_data = AdditionalPersonalDataSerializer(required=False)
     medical_history = MedicalHistorySerializer(required=False)
     medical_health_questionnaire = MedicalHealthQuestionnaireSerializer(required=False)
@@ -214,7 +215,8 @@ class MixTrackRecordSerializer(serializers.HyperlinkedModelSerializer):
         model = TrackRecord
         fields = ("additional_personal_data", "medical_history", "medical_health_questionnaire",  
                 "allergy", "patient", "clinician", "female", "social_history", "oral_assessment", 
-                "occlusion", "dental_history", "id", "is_approved_instructor", "is_approved_patient", "gingiva", "url")
+                "occlusion", "dental_history", "id", "is_approved_instructor", "is_approved_patient", "gingiva", 
+                "pending_for_approval", "clinical_instructor", "url")
 
     def update(self, instance, validated_data):
 

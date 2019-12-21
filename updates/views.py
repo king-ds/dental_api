@@ -29,7 +29,7 @@ class AssignPatient(generics.UpdateAPIView):
 class AssignTrackRecord(generics.UpdateAPIView):
     serializer_class = AssignTrackRecordSerializer
     lookup_field = 'id'
-    queryset = TrackRecord.objects.filter(is_approved_instructor=False)
+    queryset = TrackRecord.objects.all()
 
 class UpdatePatientDetails(APIView):
 
@@ -53,3 +53,13 @@ class UpdateClinicianDetails(APIView):
         
         return Response(serializer.errors, status=HTTP_404_NOT_FOUND)
 
+class UpdateInstructorDetails(APIView):
+
+    def patch(self, request, *args, **kwargs):
+        clinical_instructor = get_object_or_404(ClinicalInstructor, pk=kwargs['id'])
+        serializer = ClinicalInstructorSerializer(clinical_instructor, data=request.data, partial=True)
+        if serializer.is_valid():
+            clinical_instructor = serializer.save()
+            return Response(serializer.data, status=HTTP_200_OK)
+        
+        return Response(serializer.errors, status=HTTP_404_NOT_FOUND)

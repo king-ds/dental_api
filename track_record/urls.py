@@ -32,5 +32,5 @@ urlpatterns = [
     path('track-record/vital-sign-detail/<int:id>', views.VitalSignDetailView.as_view()),
     path('track-record/dental-chart-detail/<int:id>', views.DentalChartDetailView.as_view()),
     path('track-record/treatment-record-detail/<int:id>', views.TreatmentRecordDetailView.as_view()),
-    path('track-record/cdar-detail/<int:id>', views.TreatmentRecordDetailView.as_view()),
+    path('track-record/cdar-detail/<int:id>', views.CDARDetailView.as_view()),
 ]

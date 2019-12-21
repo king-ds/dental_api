@@ -22,7 +22,7 @@ class ClinicalInstructorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ClinicalInstructor
-        fields = ('id', 'username', 'first_name', 'middle_name', 'last_name', 'password')
+        fields = ('id', 'username', 'first_name', 'middle_name', 'last_name', 'password', 'datetime_joined')
 
 class PatientSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True)

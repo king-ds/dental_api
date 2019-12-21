@@ -66,7 +66,8 @@ def login_as_instructor(request):
 
     if isExist:
         user = ClinicalInstructor.objects.get(username=username, password=password)
-        data = { 'message' : 'success', 'id' : user.id }
+        data = { 'message' : 'success', 'id' : user.id, 'token' : secrets.token_hex(), 
+                'first_name' : user.first_name, 'middle_name' : user.middle_name, 'last_name' : user.last_name }
         status = HTTP_200_OK
     else:
         data = { 'message' : 'error' }
@@ -85,7 +86,7 @@ def login_as_patient(request):
 
     if isExist:
         user = Patient.objects.get(username=username, password=password)
-        data = { 'message' : 'success', 'id' : user.id }
+        data = { 'message' : 'success', 'id' : user.id, 'token' : secrets.token_hex() }
         status = HTTP_200_OK
     else:
         data = { 'message' : 'error' }

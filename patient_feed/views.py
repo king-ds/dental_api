@@ -33,7 +33,7 @@ class RetrievePatient(generics.RetrieveAPIView):
     serializer_class = PatientSerializer
     
 class MyPatientTrackRecord(generics.ListAPIView):
-    search_fields = ['id', 'patient__first_name', 'patient__middle_name']
+    search_fields = ['id', 'patient__first_name', 'patient__last_name']
     filter_backends = (filters.SearchFilter,)
     serializer_class = MixTrackRecordSerializer
 

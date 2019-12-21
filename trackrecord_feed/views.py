@@ -25,14 +25,19 @@ from track_record.serializers import *
 from track_record.models import *
 
 # Create your views here.
-class MyTrackRecord(generics.ListAPIView):
-    search_fields = ['id']
-    filter_backends = (filters.SearchFilter,)
-    serializer_class = MixTrackRecordSerializer
+# class MyTrackRecord(generics.ListAPIView):
+#     search_fields = ['id']
+#     filter_backends = (filters.SearchFilter,)
+#     serializer_class = MixTrackRecordSerializer
 
-    def get_queryset(self):
-        patient_id = self.kwargs['patient']
-        return TrackRecord.objects.filter(patient=patient_id)
+#     def get_queryset(self):
+#         patient_id = self.kwargs['patient']
+#         return TrackRecord.objects.filter(patient=patient_id)
+
+class MyTrackRecord(generics.RetrieveAPIView):
+    lookup_field = 'patient'
+    serializer_class = MixTrackRecordSerializer
+    queryset = TrackRecord.objects.all()
 
 class MyAllCDAR(generics.ListAPIView):
     search_fields = ['procedure', 'id', 'clinician__last_name', 'clinician__first_name', 
@@ -55,3 +60,35 @@ class MyTodayCDAR(generics.ListAPIView):
     def get_queryset(self):
         clinician_id = self.kwargs['clinician']
         return CDAR.objects.filter(clinician=clinician_id, date=date.today())
+
+class InstructorAllCDAR(generics.ListAPIView):
+    search_fields = ['procedure', 'id', 'clinician__last_name', 'clinician__first_name', 
+                'patient__last_name', 'patient__first_name', 'clinical_instructor__first_name', 
+                'clinical_instructor__last_name', 'date']
+    filter_backends = (filters.SearchFilter,)
+    serializer_class = MixCDARSerializer
+
+    def get_queryset(self):
+        instructor_id = self.kwargs['clinical_instructor']
+        return CDAR.objects.filter(clinical_instructor=instructor_id)
+
+class InstructorTodayCDAR(generics.ListAPIView):
+    search_fields = ['procedure', 'id', 'clinician__last_name', 'clinician__first_name', 
+                    'patient__last_name', 'patient__first_name', 'clinical_instructor__first_name', 
+                    'clinical_instructor__last_name', 'date']
+    filter_backends = (filters.SearchFilter,)
+    serializer_class = MixCDARSerializer
+
+    def get_queryset(self):
+        instructor_id = self.kwargs['clinical_instructor']
+        return CDAR.objects.filter(clinical_instructor=instructor_id, date=date.today())
+
+class InstructorTrackRecordFeed(generics.ListAPIView):
+    search_fields = ['id', 'patient__first_name', 'patient__last_name', 'clinician__last_name',
+                    'clinician__first_name']
+    filter_backends = (filters.SearchFilter,)
+    serializer_class = MixTrackRecordSerializer
+
+    def get_queryset(self):
+        instructor_id = self.kwargs['clinical_instructor']
+        return TrackRecord.objects.filter(clinical_instructor=instructor_id)
