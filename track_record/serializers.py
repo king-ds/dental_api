@@ -24,7 +24,7 @@ class MedicalHistorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class MedicalHealthQuestionnaireSerializer(serializers.ModelSerializer):
-    others = serializers.CharField(allow_blank=True)
+    others = serializers.CharField(allow_blank=True, required=False)
 
     class Meta:
         model = MedicalHealthQuestionnaire
