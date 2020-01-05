@@ -37,7 +37,7 @@ class PatientSerializer(serializers.ModelSerializer):
     marital_status = serializers.CharField(required=True)
     occupation = serializers.CharField(required=True)
     number_of_kids = serializers.IntegerField(required=True)
-    height = serializers.FloatField(required=True)
+    height = serializers.CharField(required=True)
     weight = serializers.FloatField(required=True)
     permanent_address = serializers.CharField(required=True)
     telephone_num = serializers.CharField(allow_blank=True)

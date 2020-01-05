@@ -8,8 +8,6 @@ class Clinician(models.Model):
     password = models.CharField(max_length=100)
     clinic_level = models.CharField(max_length=10)
     datetime_joined = models.DateTimeField(auto_now_add=True)
-    # CDAR = models.ForeignKey()
-    # track_record = models.ForeignKey()
 
     def __str__(self):
         return str(self.id)
@@ -21,7 +19,6 @@ class ClinicalInstructor(models.Model):
     last_name = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     datetime_joined = models.DateTimeField(auto_now_add=True)
-    # CDAR = models.ForeignKey()
 
     def __str__(self):
         return str(self.id)
@@ -42,7 +39,7 @@ class Patient(models.Model):
     marital_status = models.CharField(max_length=30)
     occupation = models.CharField(max_length=30)
     number_of_kids = models.IntegerField()
-    height = models.FloatField()
+    height = models.CharField(max_length=10)
     weight = models.FloatField()
     permanent_address = models.TextField()
     telephone_num = models.CharField(max_length=10)
