@@ -44,6 +44,14 @@ class CreateVitalSign(generics.CreateAPIView):
     model = VitalSign
     serializer_class = VitalSignSerializer
 
+class CreateDiagnosis(generics.CreateAPIView):
+    model = Diagnosis
+    serializer_class = DiagnosisSerializer
+
+class CreateTreatmentPlan(generics.CreateAPIView):
+    model = TreatmentPlan
+    serializer_class = TreatmentPlanSerializer
+
 class CreateFemale(generics.CreateAPIView):
     model = Female
     serializer_class = FemaleSerializer
@@ -102,6 +110,20 @@ class VitalSignFeed(generics.ListAPIView):
         track_record_id = self.kwargs['track_record']
         return VitalSign.objects.filter(track_record=track_record_id)
 
+class DiagnosisFeed(generics.ListAPIView):
+    serializer_class = DiagnosisSerializer
+
+    def get_queryset(self):
+        track_record_id = self.kwargs['track_record']
+        return Diagnosis.objects.filter(track_record=track_record_id)
+
+class TreatmentPlanFeed(generics.ListAPIView):
+    serializer_class = TreatmentPlanSerializer
+
+    def get_queryset(self):
+        track_record_id = self.kwargs['track_record']
+        return TreatmentPlan.objects.filter(track_record=track_record_id)
+
 class DentalChartFeed(generics.ListAPIView):
     serializer_class = DentalChartSerializer
 
@@ -151,6 +173,38 @@ class VitalSignDetailView(APIView):
     def delete(self, request, *args, **kwargs):
         vital_sign = get_object_or_404(VitalSign, pk=kwargs['id'])
         vital_sign.delete()
+        return Response("Successfully Deleted", status=HTTP_204_NO_CONTENT)
+
+class DiagnosisDetailView(APIView):
+    
+    def patch(self, request, *args, **kwargs):
+        diagnosis = get_object_or_404(Diagnosis, pk=kwargs['id'])
+        serializer = DiagnosisSerializer(diagnosis, data=request.data, partial=True)
+        if serializer.is_valid():
+            diagnosis = serializer.save()
+            return Response(serializer.data, status=HTTP_200_OK)
+
+        return Response(serializer.errors, status=HTTP_404_NOT_FOUND)
+
+    def delete(self, request, *args, **kwargs):
+        diagnosis = get_object_or_404(Diagnosis, pk=kwargs['id'])
+        diagnosis.delete()
+        return Response("Successfully Deleted", status=HTTP_204_NO_CONTENT)
+
+class TreatmentPlanDetailView(APIView):
+    
+    def patch(self, request, *args, **kwargs):
+        treatment_plan = get_object_or_404(TreatmentPlan, pk=kwargs['id'])
+        serializer = TreatmentPlanSerializer(treatment_plan, data=request.data, partial=True)
+        if serializer.is_valid():
+            treatment_plan = serializer.save()
+            return Response(serializer.data, status=HTTP_200_OK)
+
+        return Response(serializer.errors, status=HTTP_404_NOT_FOUND)
+
+    def delete(self, request, *args, **kwargs):
+        treatment_plan = get_object_or_404(TreatmentPlan, pk=kwargs['id'])
+        treatment_plan.delete()
         return Response("Successfully Deleted", status=HTTP_204_NO_CONTENT)
 
 class DentalChartDetailView(APIView):

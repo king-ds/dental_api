@@ -18,6 +18,7 @@ class MedicalHistorySerializer(serializers.ModelSerializer):
     illnesses = serializers.CharField(allow_blank=True)
     medications = serializers.CharField(allow_blank=True)
     childhood_disease_history = serializers.CharField(allow_blank=True)
+    datetime_added = serializers.DateTimeField(required=False)
 
     class Meta:
         model = MedicalHistory
@@ -25,6 +26,7 @@ class MedicalHistorySerializer(serializers.ModelSerializer):
 
 class MedicalHealthQuestionnaireSerializer(serializers.ModelSerializer):
     others = serializers.CharField(allow_blank=True, required=False)
+    datetime_added = serializers.DateTimeField(required=False)
 
     class Meta:
         model = MedicalHealthQuestionnaire
@@ -55,8 +57,23 @@ class VitalSignSerializer(serializers.ModelSerializer):
         model = VitalSign
         fields = "__all__"
 
+class DiagnosisSerializer(serializers.ModelSerializer):
+    description = serializers.CharField(allow_blank=True, required=False)
+
+    class Meta:
+        model = Diagnosis
+        fields = "__all__"
+
+class TreatmentPlanSerializer(serializers.ModelSerializer):
+    description = serializers.CharField(allow_blank=True, required=False)
+
+    class Meta:
+        model = TreatmentPlan
+        fields = "__all__"
+
 class TreatmentRecordSerializer(serializers.ModelSerializer):
     procedure = serializers.CharField(allow_blank=True, required=False)
+    treatment_notes = serializers.CharField(allow_blank=True, required=False)
 
     class Meta:
         model = TreatmentRecord
@@ -64,6 +81,8 @@ class TreatmentRecordSerializer(serializers.ModelSerializer):
 
 class CDARSerializer(serializers.ModelSerializer):
     procedure = serializers.CharField(allow_blank=True, required=False)
+    treatment_record = serializers.IntegerField(required=False, allow_null=True)
+
 
     class Meta:
         model = CDAR
@@ -111,6 +130,7 @@ class SocialHistorySerializer(serializers.ModelSerializer):
     often_alcoholic = serializers.CharField(allow_blank=True, required=False)
     years_alcoholic = serializers.CharField(allow_blank=True, required=False)
     stop_alcoholic = serializers.CharField(allow_blank=True, required=False)
+    datetime_added = serializers.DateTimeField(required=False)
     
     class Meta:
         model = SocialHistory
@@ -136,6 +156,7 @@ class DentalHistorySerializer(serializers.ModelSerializer):
     relevant_jaw_pain = serializers.CharField(allow_blank=True, required=False)
     relevant_catch = serializers.CharField(allow_blank=True, required=False)
     date_last_visit = serializers.DateField(required=False)
+    datetime_added = serializers.DateTimeField(required=False)
 
     class Meta:
         model = DentalHistory
@@ -241,6 +262,7 @@ class MixTrackRecordSerializer(serializers.HyperlinkedModelSerializer):
             medical_history.allergies = medical_history_data.get('allergies', medical_history.allergies)
             medical_history.illnesses = medical_history_data.get('illnesses', medical_history.illnesses)
             medical_history.medications = medical_history_data.get('medications', medical_history.medications)
+            medical_history.datetime_added = medical_history_data.get('datetime_added', medical_history.datetime_added)
             medical_history.childhood_disease_history = medical_history_data.get('childhood_disease_history', medical_history.childhood_disease_history)
             
             medical_history.save()
@@ -298,6 +320,8 @@ class MixTrackRecordSerializer(serializers.HyperlinkedModelSerializer):
             medical_health_questionnaire.empyema  = medical_health_questionnaire_data.get('empyema', medical_health_questionnaire.empyema)
             medical_health_questionnaire.swollen_ankles  = medical_health_questionnaire_data.get('swollen_ankles', medical_health_questionnaire.swollen_ankles)
             medical_health_questionnaire.others = medical_health_questionnaire_data.get('others', medical_health_questionnaire.others)
+            medical_health_questionnaire.datetime_added = medical_health_questionnaire_data.get('datetime_added', medical_health_questionnaire.datetime_added)
+
 
             medical_health_questionnaire.save()
         except:
@@ -431,6 +455,7 @@ class MixTrackRecordSerializer(serializers.HyperlinkedModelSerializer):
             social_history.often_alcoholic = social_history_data.get('often_alcoholic', social_history.often_alcoholic)
             social_history.years_alcoholic = social_history_data.get('years_alcoholic', social_history.years_alcoholic)
             social_history.stop_alcoholic = social_history_data.get('stop_alcoholic', social_history.stop_alcoholic)
+            social_history.datetime_added = social_history_data.get('datetime_added', social_history.datetime_added)
 
             social_history.save()
 
@@ -507,7 +532,7 @@ class MixTreatmentRecordSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = TreatmentRecord
-        fields = ("patient", "clinician", "clinical_instructor",  
+        fields = ("patient", "clinician", "clinical_instructor", "treatment_notes",
                 "track_record", "procedure", "date", "patient_signature", "instructor_signature", "id")
 
 class MixCDARSerializer(serializers.HyperlinkedModelSerializer):
@@ -519,4 +544,6 @@ class MixCDARSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CDAR
         fields = ("patient", "clinician", "clinical_instructor",  
-                "track_record", "procedure", "date", "patient_signature", "instructor_signature", "id")
+                "track_record", "procedure", "date", "patient_signature", 
+                "instructor_signature", "pending_for_approval", 
+                "from_treatment_record", "treatment_record", "id")

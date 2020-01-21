@@ -55,4 +55,4 @@ class PatientSerializer(serializers.ModelSerializer):
         'occupation', 'height', 'weight', 'permanent_address',
         'telephone_num', 'phone_num', 'email_address', 'emergency_full_name',
         'relation_to_patient', 'emergency_phone_num', 'emergency_address', 
-        'emergency_telephone_num', 'datetime_joined')
+        'emergency_telephone_num', 'datetime_joined', 'has_doctor')

@@ -42,7 +42,7 @@ def login_as_clinician(request):
     password = request.data.get('password')
     print(secrets.token_hex())
 
-    isExist = Clinician.objects.filter(student_number=student_number, password=password).exists()
+    isExist = Clinician.objects.filter(student_number=student_number, password=password, active=True).exists()
 
     if isExist:
         user = Clinician.objects.get(student_number=student_number, password=password)
@@ -62,7 +62,7 @@ def login_as_instructor(request):
     username = request.data.get("username")
     password = request.data.get("password")
 
-    isExist = ClinicalInstructor.objects.filter(username=username, password=password).exists()
+    isExist = ClinicalInstructor.objects.filter(username=username, password=password, active=True).exists()
 
     if isExist:
         user = ClinicalInstructor.objects.get(username=username, password=password)

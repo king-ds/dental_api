@@ -70,7 +70,7 @@ class InstructorAllCDAR(generics.ListAPIView):
 
     def get_queryset(self):
         instructor_id = self.kwargs['clinical_instructor']
-        return CDAR.objects.filter(clinical_instructor=instructor_id)
+        return CDAR.objects.filter(clinical_instructor=instructor_id).order_by('-date')
 
 class InstructorTodayCDAR(generics.ListAPIView):
     search_fields = ['procedure', 'id', 'clinician__last_name', 'clinician__first_name', 
@@ -81,7 +81,7 @@ class InstructorTodayCDAR(generics.ListAPIView):
 
     def get_queryset(self):
         instructor_id = self.kwargs['clinical_instructor']
-        return CDAR.objects.filter(clinical_instructor=instructor_id, date=date.today())
+        return CDAR.objects.filter(clinical_instructor=instructor_id, date=date.today()).order_by('-id')
 
 class InstructorTrackRecordFeed(generics.ListAPIView):
     search_fields = ['id', 'patient__first_name', 'patient__last_name', 'clinician__last_name',

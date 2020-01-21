@@ -145,7 +145,6 @@ class DentalHistory(models.Model):
     brush = models.IntegerField(null=True, blank=True)
     floss = models.IntegerField(null=True, blank=True)
     rinse = models.IntegerField(null=True, blank=True)
-
     smile = models.BooleanField(default=False)
     relevant_smile = models.CharField(max_length=50)
     gums = models.BooleanField(default=False)
@@ -282,9 +281,26 @@ class VitalSign(models.Model):
     def __str__(self):
         return str(self.id)
 
+class Diagnosis(models.Model):
+    description = models.CharField(max_length=255, blank=True, null=True)
+    track_record = models.ForeignKey(TrackRecord, on_delete=models.CASCADE, blank=True, null=True)
+    datetime_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.id)
+
+class TreatmentPlan(models.Model):
+    description = models.CharField(max_length=255, blank=True, null=True)
+    track_record = models.ForeignKey(TrackRecord, on_delete=models.CASCADE, blank=True, null=True)
+    datetime_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.id)
+
 class TreatmentRecord(models.Model):
     date = models.DateField(null=True, blank=True)
     procedure = models.CharField(max_length=100)
+    treatment_notes = models.TextField()
     clinician = models.ForeignKey(Clinician, on_delete=models.CASCADE, blank=True, null=True)
     clinical_instructor = models.ForeignKey(ClinicalInstructor, on_delete=models.CASCADE, blank=True, null=True)
     patient_signature = models.BooleanField(default=False)
@@ -302,6 +318,9 @@ class CDAR(models.Model):
     clinical_instructor = models.ForeignKey(ClinicalInstructor, on_delete=models.CASCADE, blank=True, null=True)
     patient_signature = models.BooleanField(default=False)
     instructor_signature = models.BooleanField(default=False)
+    pending_for_approval = models.BooleanField(default=False)
+    from_treatment_record = models.BooleanField(default=False)
+    treatment_record = models.IntegerField(null=False)
     track_record = models.ForeignKey(TrackRecord, on_delete=models.CASCADE, blank=True, null=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, blank=True, null=True)
 
